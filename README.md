@@ -1,2 +1,35 @@
 # ascend-pgp-assignment
 Ascend Program - PGP Assignment
+
+Git Repo HTTP URL:
+https://github.com/chandramouliballola/ascend-pgp-assignment.git
+
+
+1. git clone https://github.com/chandramouliballola/ascend-pgp-assignment.git. Lets suppose the repository cloned in C:/Users/User/Downloads/ascend-pgp-assignment
+2. Open Command Prompt in the above folder.
+3. Make sure the Docker Daemon is running based on the operating system. In Windows, open Docker Desktop. After the Decker Desktop is opened,
+
+Pulling and Building the required images in docker:
+
+4. Run Command "docker pull mongo"
+5. Run Command "docker pull openjdk:latest"
+6. Run command "C:/Users/User/Downloads/ascend-pgp-assignment/EurekhaServer
+7. Run Commant "docker build -t eurekha-server-image ."
+8. Run command "C:/Users/User/Downloads/ascend-pgp-assignment/zuul-cloud-gateway
+9. Run Command "docker build -t zuul-cloud-gateway-image ."
+10. Run command "C:/Users/User/Downloads/ascend-pgp-assignment/users-service
+11. Run Command "docker build -t users-service-image ."
+12. Run command "C:/Users/User/Downloads/ascend-pgp-assignment/transactions-service
+13. Run Command "docker build -t transactions-service-image ."
+
+Creating a docker network:
+
+14. Run command "docker network create -d bridge bank-transactions"
+
+Creating and Running Containers:
+
+15. Mongo DB: Run Command "docker run -d -p 27017:27017 --name mondo-db-container mongo:latest"
+16. Eurekha Server: Run Command "docker container run --network bank-transactions --name eureka-server-container -p 8761:8761 -d eurekha-server-image"
+16. Zuul Cloud Gateway API Server: Run Command "docker container run --network bank-transactions --name zuul-cloud-gateway-container -p 8765:8765 -d zuul-cloud-gateway-image"
+17. Users Service: Run Command "docker container run --network bank-transactions --name users-service-container -p 9001:9001 -d users-service-image"
+18. Transaction Service: "docker container run --network bank-transactions --name transactions-service-container -p 9004:9004 -d transactions-service-image"
