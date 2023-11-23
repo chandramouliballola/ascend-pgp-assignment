@@ -1,0 +1,38 @@
+server:
+ port: 8765
+
+spring:
+  application:
+    name: zuul-cloud-gateway
+  
+
+  cloud:
+   gateway:
+      routes:
+      - id: user-service
+        uri: http://localhost:9002/users/
+        predicates:
+        - Path=/users/**
+        
+      - id: department-service
+        uri: http://localhost:9001/departments/ 
+        predicates:
+         - Path=/departments/**
+         
+      - id: users-service
+        uri: http://users-service-container:9001/
+        predicates:
+        - Path=/api/user/**
+        
+      - id: transactions-service
+        uri: http://transactions-service-container:9002/
+        predicates:
+        - Path=/api/transaction/**
+
+eureka:
+  client:
+    service-url:
+     defaultZone: http://eurekha-server-container:8761/eureka
+    fetch-registry: true
+    register-with-eureka: true
+      
